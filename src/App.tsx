@@ -1,16 +1,29 @@
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Interface from './pages/Interface';
+import SecondPage from './pages/SecondPage';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 style={{ fontFamily: 'Roboto' }}>Hello, Roboto Font!</h1>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* Root route: full scrollable layout */}
+        <Route
+          path="/"
+          element={
+            <div>
+              <Home />
+            
+            </div>
+          }
+        />
+        {/* Separate routes */}
+        <Route path="/interface" element={<Interface />} />
+        <Route path="/secondpage" element={<SecondPage />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
