@@ -4,25 +4,19 @@ import Home from './pages/Home';
 import Interface from './pages/Interface';
 import SecondPage from './pages/SecondPage';
 
+import TradingViewSignUp from './pages/Tradingviewsignup';
+import Header from './components/Header';
+import StockSection from './components/StockSection';
+import NewsSection from './components/NewsSection';
+import CurrencyExchange from './components/CurrencyExchange';
+
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        {/* Root route: full scrollable layout */}
-        <Route
-          path="/"
-          element={
-            <div>
-              <Home />
-            
-            </div>
-          }
-        />
-        {/* Separate routes */}
-        <Route path="/interface" element={<Interface />} />
-        <Route path="/secondpage" element={<SecondPage />} />
-      </Routes>
-    </Router>
+    <div className="App">
+      <header className="App-header">
+        <h1 style={{ fontFamily: 'Roboto' }}>Hello, Roboto Font!</h1>
+      </header>
+    </div>
   );
 };
 

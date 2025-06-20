@@ -1,0 +1,126 @@
+.tv-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tv-container {
+  background: #000;
+  border-radius: 12px;
+  box-shadow: 0 2px 20px #000c;
+  padding: 36px 32px 24px 32px;
+  width: 350px;
+  max-width: 94vw;
+}
+.tv-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.tv-title {
+  color: #fff;
+  font-size: 26px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 28px;
+}
+.tv-btn-google {
+  background: #fff;
+  color: #222;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  gap: 14px;
+  transition: background 0.15s;
+}
+.tv-btn-google:hover {
+  background: #f1f1f1;
+}
+.tv-provider-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 10px;
+}
+.tv-provider-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: background .16s;
+  cursor: pointer;
+  font-size: 18px;
+  background: #252525;
+}
+.tv-provider-btn img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  display: block;
+}
+.tv-provider-btn:active {
+  opacity: 0.82;
+}
+.tv-divider-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.tv-divider {
+  flex-grow: 1;
+  height: 1px;
+  background: #222;
+  border: none;
+}
+.tv-divider-txt {
+  color: #bbb;
+  font-size: 15px;
+}
+.tv-btn-email {
+  background: #222;
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.tv-btn-email:hover {
+  background: #333;
+}
+.tv-signin {
+  color: #bbb;
+  text-align: center;
+  margin-top: 12px;
+  font-size: 14px;
+}
+.tv-signin a {
+  color: #39f;
+  text-decoration: none;
+  font-weight: 500;
+}
+.tv-signin a:hover {
+  text-decoration: underline;
+}
