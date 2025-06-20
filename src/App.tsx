@@ -12,11 +12,26 @@ import CurrencyExchange from './components/CurrencyExchange';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 style={{ fontFamily: 'Roboto' }}>Hello, Roboto Font!</h1>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* Root route: full scrollable layout */}
+        <Route
+          path="/"
+          element={
+            <div>
+              <Home />
+            <TradingViewSignUp />
+        <StockSection />
+        <NewsSection />
+        <CurrencyExchange />
+            </div>
+          }
+        />
+        {/* Separate routes */}
+        <Route path="/interface" element={<Interface />} />
+        <Route path="/secondpage" element={<SecondPage />} />
+      </Routes>
+    </Router>
   );
 };
 
