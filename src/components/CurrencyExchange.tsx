@@ -8,7 +8,7 @@ const CurrencyExchange: React.FC = () => {
       <div className="currency-cards">
         {[...Array(4)].map((_, i) => (
           <div className="currency-card" key={i}>
-            <label>CURRENCY</label>
+            <label>COST</label>
             <div className="currency-select">
               <span>🇸🇬 SGD</span>
               <span>⇄</span>
