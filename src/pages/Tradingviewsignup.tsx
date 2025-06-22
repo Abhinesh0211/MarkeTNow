@@ -3,11 +3,7 @@ import './Tradingviewsignup.css';
 
 
 import googleLogo from '../assets/google.png';
-import facebookLogo from '../assets/facebook.png';
-import xLogo from '../assets/x.png';
-import yahooLogo from '../assets/yahoo.png';
-import appleLogo from '../assets/apple.png';
-import linkedinLogo from '../assets/linkedin.png';
+
 import tradingviewLogo from '../assets/tradingview.png';
 
 const providers = [
@@ -17,31 +13,8 @@ const providers = [
     img: googleLogo,
     style: { background: "#fff", color: "#222" }
   },
-  {
-    name: "Facebook",
-    img: facebookLogo,
-    style: { background: "#1877f2" }
-  },
-  {
-    name: "X",
-    img: xLogo,
-    style: { background: "#000" }
-  },
-  {
-    name: "Yahoo",
-    img: yahooLogo,
-    style: { background: "#6001d2" }
-  },
-  {
-    name: "Apple",
-    img: appleLogo,
-    style: { background: "#161616" }
-  },
-  {
-    name: "LinkedIn",
-    img: linkedinLogo,
-    style: { background: "#0a66c2" }
-  }
+  
+  
 ];
 
 export default function TradingViewSignUp() {
