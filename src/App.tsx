@@ -1,22 +1,21 @@
 import React from 'react';
-import TradingViewSignUp from './pages/Tradingviewsignup';
-import Header from './components/Header';
-import StockSection from './components/StockSection';
-import NewsSection from './components/NewsSection';
-import CurrencyExchange from './components/CurrencyExchange';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignupForm from './pages/SignupForm';
+import SigninForm from './pages/SigninForm';
 import './styles/Global.css';
+
 
 function App() {
   return (
-    <div>
-      <Header />
+    <Router>
       <main className="container">
-        <TradingViewSignUp />
-        <StockSection />
-        <NewsSection />
-        <CurrencyExchange />
+        <Routes>
+          <Route path="/" element={<SignupForm />} />
+          <Route path="/signin" element={<SigninForm />} />
+          
+        </Routes>
       </main>
-    </div>
+    </Router>
   );
 }
 
