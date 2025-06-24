@@ -1,19 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './styles/Global.css';
+import MarketTicker from './components/MarketTicker';
+import CurrencyExchange from './components/CurrencyExchange';
+import TimeChart from './components/TimeChart';
+import './styles/Dashboard.css';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const Index = () => {
+  return (
+    <div className="dashboard">
+      <MarketTicker />
+      <div className="dashboard-content">
+        <div className="currency-exchange">
+          <CurrencyExchange />
+        </div>
+        <div className="time-chart">
+          <TimeChart />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+root.render(<Index />);
