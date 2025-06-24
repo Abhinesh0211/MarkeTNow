@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { useState, MouseEvent } from 'react';
 import {
-  AppBar, Box, Toolbar, IconButton, Typography, InputBase, Badge,
-  MenuItem, Menu, Switch, useTheme
+  AppBar, Toolbar, IconButton, Typography, InputBase, Badge,
+  MenuItem, Menu, Switch, Box
 } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,6 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import SecondPage from './SecondPage';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -52,31 +51,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [darkMode, setDarkMode] = React.useState(false);
-  const theme = useTheme();
+const Navbar: React.FC = () => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleProfileMenuOpen = (event: MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
+  const handleMenuClose = (): void => {
     setAnchorEl(null);
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleMobileMenuOpen = (event: MouseEvent<HTMLElement>): void => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const toggleDarkMode = () => {
+  const toggleDarkMode = (): void => {
     setDarkMode(!darkMode);
-    // Add context or storage logic here if needed
   };
 
   const menuId = 'primary-search-account-menu';
@@ -86,11 +80,10 @@ export default function PrimarySearchAppBar() {
     <Menu
       anchorEl={anchorEl}
       id={menuId}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
+      open={Boolean(anchorEl)}
       onClose={handleMenuClose}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
@@ -101,11 +94,10 @@ export default function PrimarySearchAppBar() {
     <Menu
       anchorEl={mobileMoreAnchorEl}
       id={mobileMenuId}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
+      open={Boolean(mobileMoreAnchorEl)}
       onClose={handleMenuClose}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
     >
       <MenuItem>
         <Switch checked={darkMode} onChange={toggleDarkMode} />
@@ -137,14 +129,7 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <div>
-    <Box sx={{
-      backgroundImage: 'url(/backimg.jpg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      minHeight: '100vh',
-      color: '#fff'
-    }}>
+    <>
       <AppBar position="static" sx={{ backgroundColor: 'rgba(0, 0, 0, 0.3)', boxShadow: 'none' }}>
         <Toolbar>
           <IconButton size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
@@ -155,10 +140,10 @@ export default function PrimarySearchAppBar() {
           </Typography>
 
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
-            <Link to="/" style={{ textDecoration: 'none', color: '#fff' }}>
+            <Link to="/home" style={{ textDecoration: 'none', color: '#fff' }}>
               <Typography variant="button">Home</Typography>
             </Link>
-            <Link to="/news" style={{ textDecoration: 'none', color: '#fff' }}>
+            <Link to="/NewsPage" style={{ textDecoration: 'none', color: '#fff' }}>
               <Typography variant="button">News</Typography>
             </Link>
             <Link to="/currencies" style={{ textDecoration: 'none', color: '#fff' }}>
@@ -166,6 +151,9 @@ export default function PrimarySearchAppBar() {
             </Link>
             <Link to="/stocks" style={{ textDecoration: 'none', color: '#fff' }}>
               <Typography variant="button">Stocks</Typography>
+            </Link>
+            <Link to="/Wishlist" style={{ textDecoration: 'none', color: '#fff' }}>
+              <Typography variant="button">Wishlist</Typography>
             </Link>
           </Box>
 
@@ -204,25 +192,8 @@ export default function PrimarySearchAppBar() {
 
       {renderMobileMenu}
       {renderMenu}
-
-      <Box sx={{
-        p: 5,
-        mt: 18,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
-      }}>
-        <Typography variant="h3" sx={{ fontWeight: 'bold', textShadow: '1px 1px 2px black' }}>
-          "Navigate the market with confidence."
-        </Typography>
-        <Typography variant="h6" sx={{ maxWidth: '600px', mt: 2, textShadow: '1px 1px 2px black' }}>
-          Your one-stop portal for live stock prices, currency updates, and global news.
-        </Typography>
-      </Box>
-
-    </Box>
-    <SecondPage />
-    </div>
+    </>
   );
-}
+};
+
+export default Navbar;

@@ -8,7 +8,7 @@ import xLogo from '../assets/x.png';
 import yahooLogo from '../assets/yahoo.png';
 import appleLogo from '../assets/apple.png';
 import linkedinLogo from '../assets/linkedin.png';
-import tradingviewLogo from '../assets/tradingview.png';
+
 
 const providers = [
   {
@@ -51,7 +51,7 @@ export default function TradingViewSignUp() {
         {/* Logo */}
         <div className="tv-logo">
           <img
-            src={tradingviewLogo}
+            src={""}
             alt="TradingView Logo"
             height={80}
             width={80}

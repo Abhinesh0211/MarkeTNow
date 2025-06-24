@@ -12,28 +12,31 @@ const stockData = [
 const StocksSection: React.FC = () => {
   return (
     <section className="stocks">
-      <h2>Stocks</h2>
-      <table className="stocks-table">
-        <thead>
-          <tr>
-            <th>Stocks</th>
-            <th>Value</th>
-            <th>Growth</th>
-          </tr>
-        </thead>
-        <tbody>
-          {stockData.map((stock, i) => (
-            <tr key={i}>
-              <td>{stock.name}</td>
-              <td>{stock.value}</td>
-              <td className={stock.growth >= 0 ? 'positive' : 'negative'}>
-                {stock.growth}%
-              </td>
+      <h2 className="stocks-heading">📈 Trending Stocks</h2>
+      <div className="stocks-table-wrapper">
+        <table className="stocks-table">
+          <thead>
+            <tr>
+              <th>Stock</th>
+              <th>Value (₹)</th>
+              <th>Growth</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {stockData.map((stock, i) => (
+              <tr key={i}>
+                <td>{stock.name}</td>
+                <td>{stock.value}</td>
+                <td className={stock.growth >= 0 ? 'positive' : 'negative'}>
+                  {stock.growth >= 0 ? `+${stock.growth}%` : `${stock.growth}%`}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 };
+
 export default StocksSection;

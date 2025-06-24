@@ -1,33 +1,37 @@
+// src/pages/Interface.tsx
 import React from 'react';
-import './Home.css';
-import { useNavigate } from 'react-router-dom';
+import {
+  Box, Typography
+} from '@mui/material';
 
-const Home = () => {
-  const navigate = useNavigate();
 
-  const handleGetStarted = () => {
-    navigate('/interface'); // Navigate to your desired route
-  };
-
+const Home: React.FC = () => {
   return (
-    <div className="home-container">
-      <video autoPlay muted loop playsInline className="bg-video">
-        <source src="/bgvideo.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+    <div>
+    <Box sx={{
+      backgroundImage: 'url(/)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      minHeight: '100vh',
+      color: '#fff'
+    }}>
+      <Box sx={{
+        p: 5,
+        mt: 18,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}>
+        <Typography variant="h3" sx={{ fontWeight: 'bold', textShadow: '1px 1px 2px black' }}>
+          "Navigate the market with confidence."
+        </Typography>
+        <Typography variant="h6" sx={{ maxWidth: '600px', mt: 2, textShadow: '1px 1px 2px black' }}>
+          Your one-stop portal for live stock prices, currency updates, and global news.
+        </Typography>
+      </Box>
 
-      <div className="home-content">
-        <h1 style={{ fontSize: '3rem', fontWeight: 'bold' }}>Your Stock Exchanger</h1>
-        <p style={{ fontSize: '1.2rem', marginTop: '1rem' }}>
-          Your trusted partner for real-time stock updates and market insights.
-        </p>
-        <div>
-          <button className="home-button primary">Login</button>
-          <button className="home-button secondary" onClick={handleGetStarted}>
-            Get Started
-          </button>
-        </div>
-      </div>
+    </Box>
     </div>
   );
 };

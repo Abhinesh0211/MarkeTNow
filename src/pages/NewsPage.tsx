@@ -1,5 +1,7 @@
 import React from 'react';
-import TickerWidget from '../components/TickerWidget';
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {
   Box,
   Card,
@@ -12,7 +14,7 @@ import {
   Chip,
 } from '@mui/material';
 
-// ✅ Define props for the reusable CardItem
+// ✅ Reusable Card component props
 interface CardItemProps {
   title: string;
   category: string;
@@ -30,6 +32,8 @@ const CardItem: React.FC<CardItemProps> = ({
   author,
   time,
 }) => {
+  const [favorite, setFavorite] = React.useState(false);
+
   return (
     <Card
       sx={{
@@ -50,18 +54,36 @@ const CardItem: React.FC<CardItemProps> = ({
       }}
     >
       <CardMedia sx={{ height: 180 }} image={image} title={title} />
+
       <CardContent>
+        {/* Title + Chip + Favorite icon row */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          <Typography variant="h6" sx={{ fontWeight: 600, maxWidth: '70%' }}>
             {title}
           </Typography>
-          <Chip label={category} color="primary" size="small" />
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Chip label={category} color="primary" size="small" />
+            <IconButton
+              onClick={() => setFavorite(!favorite)}
+              size="small"
+              sx={{ p: 0 }}
+              aria-label="favorite"
+            >
+              {favorite ? (
+                <FavoriteIcon sx={{ fontSize: 18, color: 'red' }} />
+              ) : (
+                <FavoriteBorderIcon sx={{ fontSize: 18, color: 'red' }} />
+              )}
+            </IconButton>
+          </Box>
         </Box>
 
+        {/* Description */}
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
           {description}
         </Typography>
 
+        {/* Author + Time */}
         <Box
           sx={{
             display: 'flex',
@@ -80,6 +102,8 @@ const CardItem: React.FC<CardItemProps> = ({
           </Typography>
         </Box>
       </CardContent>
+
+      {/* Card actions */}
       <CardActions>
         <Button size="small">Read Now</Button>
         <Button size="small">Share</Button>
@@ -88,7 +112,7 @@ const CardItem: React.FC<CardItemProps> = ({
   );
 };
 
-// ✅ Define news data type
+// ✅ News item type
 interface NewsItem extends CardItemProps {
   id: number;
 }
@@ -159,28 +183,22 @@ const SecondPage: React.FC = () => {
   ];
 
   return (
-    <div>
-      <Typography variant="h4" align="center" gutterBottom>
-        📈 My Market Ticker
-      </Typography>
-      <TickerWidget />
-
-      <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: 3,
-          px: 2,
-          py: 4,
-        }}
-      >
-        {newsData.map((news) => (
-          <CardItem key={news.id} {...news} />
-        ))}
-      </Box>
-    </div>
+    <Box
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: 3,
+        px: 2,
+        py: 4,
+      }}
+    >
+      {newsData.map((news) => (
+        <CardItem key={news.id} {...news} />
+      ))}
+    </Box>
   );
 };
 
 export default SecondPage;
+
