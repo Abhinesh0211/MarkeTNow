@@ -1,22 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SignupForm from './pages/SignupForm';
-import SigninForm from './pages/SigninForm';
-import './styles/Global.css';
-
-
-function App() {
+import Navigation from './components/Navigation';
+import MarketTicker from './components/MarketTicker';
+import CurrencyExchange from './components/CurrencyExchange';
+import TimeChart from './components/TimeChart';
+import '../styles/dashboard.css';
+const Index = () => {
   return (
-    <Router>
-      <main className="container">
-        <Routes>
-          <Route path="/" element={<SignupForm />} />
-          <Route path="/signin" element={<SigninForm />} />
-          
-        </Routes>
-      </main>
-    </Router>
+    <div className="dashboard">
+      <Navigation />
+      <MarketTicker />
+      <div className="dashboard-content">
+        <CurrencyExchange />
+        <TimeChart />
+      </div>
+    </div>
   );
-}
+};
 
-export default App;
+export default Index;
