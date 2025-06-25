@@ -1,13 +1,15 @@
 import React from 'react';
-import Navigation from './components/Navigation';
 import MarketTicker from './components/MarketTicker';
 import CurrencyExchange from './components/CurrencyExchange';
 import TimeChart from './components/TimeChart';
-import '../styles/dashboard.css';
-const Index = () => {
+import Navbar from './components/Navbar';
+
+import './styles/Dashboard.css';
+
+const App = () => {
   return (
     <div className="dashboard">
-      <Navigation />
+      <Navbar />
       <MarketTicker />
       <div className="dashboard-content">
         <CurrencyExchange />
@@ -17,4 +19,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default App;
