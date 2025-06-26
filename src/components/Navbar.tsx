@@ -3,7 +3,7 @@ import {
   AppBar, Toolbar, IconButton, Typography, InputBase, Badge,
   MenuItem, Menu, Switch, Box
 } from '@mui/material';
-import { styled, alpha,Theme } from '@mui/material/styles';
+import { styled, alpha } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -12,7 +12,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
-const Search = styled('div')(({ theme }: { theme: Theme }) => ({
+const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -138,7 +138,6 @@ const Navbar: React.FC = () => {
           <Typography variant="h6" noWrap component="div" sx={{ flexShrink: 0, mr: 4 }}>
             MARKET now
           </Typography>
-          
 
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
             <Link to="/home" style={{ textDecoration: 'none', color: '#fff' }}>
