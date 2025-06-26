@@ -1,22 +1,21 @@
-import React from 'react';
-import MarketTicker from './components/MarketTicker';
-import CurrencyExchange from './components/CurrencyExchange';
-import TimeChart from './components/TimeChart';
-import Navbar from './components/Navbar';
 
-import './styles/Dashboard.css';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Stocks from "./pages/Stocks";
+import NotFound from "./pages/NotFound";
 
-const App = () => {
-  return (
-    <div className="dashboard">
-      <Navbar />
-      <MarketTicker />
-      <div className="dashboard-content">
-        <CurrencyExchange />
-        <TimeChart />
-      </div>
-    </div>
-  );
-};
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/stocks" element={<Stocks />} />
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  </QueryClientProvider>
+);
 
 export default App;

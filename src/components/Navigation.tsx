@@ -1,7 +1,14 @@
 import React from 'react';
 import { Search } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+
   return (
     <nav className="navigation">
       <div className="nav-container">
@@ -10,11 +17,11 @@ const Navigation = () => {
             <div className="logo-icon">S</div>
           </div>
           <div className="nav-links">
-            <a href="#" className="nav-link">Home</a>
-            <a href="#" className="nav-link">News</a>
-            <a href="#" className="nav-link">Stocks</a>
-            <a href="#" className="nav-link active">Currency Exchange</a>
-            <a href="#" className="nav-link">Watchlist</a>
+            <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
+            <Link to="/news" className={`nav-link ${isActive('/news') ? 'active' : ''}`}>News</Link>
+            <Link to="/stocks" className={`nav-link ${isActive('/stocks') ? 'active' : ''}`}>Stocks</Link>
+            <Link to="/currency-exchange" className={`nav-link ${isActive('/currency-exchange') ? 'active' : ''}`}>Currency Exchange</Link>
+            <Link to="/watchlist" className={`nav-link ${isActive('/watchlist') ? 'active' : ''}`}>Watchlist</Link>
           </div>
         </div>
         <div className="nav-right">
