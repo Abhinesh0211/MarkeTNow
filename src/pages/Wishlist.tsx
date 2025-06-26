@@ -1,33 +1,56 @@
-// src/pages/Wishlist.tsx
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
-import CardItem from '../components/CardItem';
+import { removeFromWishlist, NewsItem } from '../redux/wishlistSlice';
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Button,
+  CardMedia,
+} from '@mui/material';
 
 const Wishlist: React.FC = () => {
-  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
- console.log('Wishlist items:', wishlistItems);
-  return (
-    <div style={{ padding: 20 }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '1rem' }}>My Wishlist ❤️</h2>
+  const wishlist = useSelector((state: RootState) => state.wishlist.items);
+  const dispatch = useDispatch();
 
-      {wishlistItems.length === 0 ? (
-        <p style={{ textAlign: 'center' }}>No items in your wishlist.</p>
+  return (
+    <Box sx={{ padding: 4, backgroundColor: '#121212', color: 'white', minHeight: '100vh' }}>
+      <Typography variant="h4" gutterBottom>
+        Wishlist
+      </Typography>
+
+      {wishlist.length === 0 ? (
+        <Typography>No items in wishlist.</Typography>
       ) : (
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '20px',
-            justifyContent: 'center',
-          }}
-        >
-          {wishlistItems.map((item) => (
-            <CardItem key={item.id} {...item} />
-          ))}
-        </div>
+        wishlist.map((newsItem: NewsItem) => (
+          <Card
+            key={newsItem.id}
+            sx={{ backgroundColor: '#1e1e1e', marginBottom: 2, color: 'white' }}
+          >
+            {newsItem.image && (
+              <CardMedia
+                component="img"
+                height="140"
+                image={newsItem.image}
+                alt={newsItem.title}
+              />
+            )}
+            <CardContent>
+              <Typography variant="h6">{newsItem.title}</Typography>
+              <Typography variant="body2">{newsItem.description}</Typography>
+              <Button
+                sx={{ color: '#f87171', marginTop: 1 }}
+                onClick={() => dispatch(removeFromWishlist(newsItem.id))}
+              >
+                Remove
+              </Button>
+            </CardContent>
+          </Card>
+        ))
       )}
-    </div>
+    </Box>
   );
 };
 

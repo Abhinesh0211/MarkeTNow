@@ -1,4 +1,11 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToWishlist, removeFromWishlist, NewsItem } from '../redux/wishlistSlice';
+import { RootState } from '../redux/store';
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { toast } from 'react-toastify';
 import {
   Box,
   Card,
@@ -9,32 +16,10 @@ import {
   Typography,
   Avatar,
   Chip,
-  IconButton
 } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToWishlist, removeFromWishlist } from '../redux/wishlistSlice';
-import { RootState } from '../redux/store';
 
-interface CardItemProps {
+interface CardItemProps extends Omit<NewsItem, 'id'> {
   id: number;
-  title: string;
-  category: string;
-  description: string;
-  image: string;
-  author: string;
-  time: string;
-}
-
-interface WishlistItem {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  image: string;
-  author: string;
-  time: string;
 }
 
 const CardItem: React.FC<CardItemProps> = ({
@@ -48,16 +33,26 @@ const CardItem: React.FC<CardItemProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const isWishlisted = useSelector((state: RootState) =>
-    state.wishlist.items.some((item: WishlistItem) => item.id === id)
-  );
+  // ✅ Get wishlist from Redux
+  const wishlist = useSelector((state: RootState) => state.wishlist.items);
+  const isFavorite = wishlist.some((item) => item.id === id);
 
-  const handleWishlistToggle = () => {
-    console.log("Toggling wishlist for:", title);
-    if (isWishlisted) {
+  const handleToggleFavorite = () => {
+    if (isFavorite) {
       dispatch(removeFromWishlist(id));
     } else {
-      dispatch(addToWishlist({ id, title, category, description, image, author, time }));
+      dispatch(
+        addToWishlist({
+          id,
+          title,
+          category,
+          description,
+          image,
+          author,
+          time,
+        })
+      );
+      toast.success('Added to wishlist');
     }
   };
 
@@ -68,6 +63,8 @@ const CardItem: React.FC<CardItemProps> = ({
         maxWidth: '100%',
         borderRadius: 3,
         boxShadow: 3,
+        backgroundColor: '#1e1e1e',
+        color: 'white',
         transition: 'transform 0.3s',
         '&:hover': {
           transform: 'scale(1.02)',
@@ -81,7 +78,6 @@ const CardItem: React.FC<CardItemProps> = ({
       }}
     >
       <CardMedia sx={{ height: 180 }} image={image} title={title} />
-
       <CardContent>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
           <Typography variant="h6" sx={{ fontWeight: 600, maxWidth: '70%' }}>
@@ -90,12 +86,12 @@ const CardItem: React.FC<CardItemProps> = ({
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Chip label={category} color="primary" size="small" />
             <IconButton
-              onClick={handleWishlistToggle}
+              onClick={handleToggleFavorite}
               size="small"
               sx={{ p: 0 }}
-              aria-label="wishlist"
+              aria-label="favorite"
             >
-              {isWishlisted ? (
+              {isFavorite ? (
                 <FavoriteIcon sx={{ fontSize: 18, color: 'red' }} />
               ) : (
                 <FavoriteBorderIcon sx={{ fontSize: 18, color: 'red' }} />
@@ -104,32 +100,30 @@ const CardItem: React.FC<CardItemProps> = ({
           </Box>
         </Box>
 
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+        <Typography variant="body2" color="gray" sx={{ mb: 2 }}>
           {description}
         </Typography>
 
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Avatar alt={author} src="/profile.png" sx={{ width: 24, height: 24 }} />
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="gray">
               {author}
             </Typography>
           </Box>
-          <Typography variant="caption" color="text.secondary">
+          <Typography variant="caption" color="gray">
             {time}
           </Typography>
         </Box>
       </CardContent>
 
       <CardActions>
-        <Button size="small">Read Now</Button>
-        <Button size="small">Share</Button>
+        <Button size="small" sx={{ color: '#90caf9' }}>
+          Read Now
+        </Button>
+        <Button size="small" sx={{ color: '#90caf9' }}>
+          Share
+        </Button>
       </CardActions>
     </Card>
   );

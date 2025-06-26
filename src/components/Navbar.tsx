@@ -76,71 +76,26 @@ const Navbar: React.FC = () => {
   const menuId = 'primary-search-account-menu';
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      id={menuId}
-      open={Boolean(anchorEl)}
-      onClose={handleMenuClose}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      id={mobileMenuId}
-      open={Boolean(mobileMoreAnchorEl)}
-      onClose={handleMenuClose}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-    >
-      <MenuItem>
-        <Switch checked={darkMode} onChange={toggleDarkMode} />
-        <p>Dark Mode</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" color="inherit">
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton size="large" color="inherit">
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
-
   return (
     <>
-      <AppBar position="static" sx={{ backgroundColor: 'rgba(0, 0, 0, 0.3)', boxShadow: 'none' }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
+          backdropFilter: 'blur(6px)',
+        }}
+      >
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton>
+          {/* <IconButton size="large" edge="start" color="inherit" sx={{ mr: 2 }}> */}
+            {/* <MenuIcon /> ADD LOGO HERE */}
+          {/* </IconButton> */}
           <Typography variant="h6" noWrap component="div" sx={{ flexShrink: 0, mr: 4 }}>
             MARKET now
           </Typography>
 
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
-            <Link to="/home" style={{ textDecoration: 'none', color: '#fff' }}>
+            <Link to="/Dashboard" style={{ textDecoration: 'none', color: '#fff' }}>
               <Typography variant="button">Home</Typography>
             </Link>
             <Link to="/NewsPage" style={{ textDecoration: 'none', color: '#fff' }}>
@@ -190,8 +145,44 @@ const Navbar: React.FC = () => {
         </Toolbar>
       </AppBar>
 
-      {renderMobileMenu}
-      {renderMenu}
+      <Menu anchorEl={anchorEl} id={menuId} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      </Menu>
+
+      <Menu
+        anchorEl={mobileMoreAnchorEl}
+        id={mobileMenuId}
+        open={Boolean(mobileMoreAnchorEl)}
+        onClose={handleMenuClose}
+      >
+        <MenuItem>
+          <Switch checked={darkMode} onChange={toggleDarkMode} />
+          <p>Dark Mode</p>
+        </MenuItem>
+        <MenuItem>
+          <IconButton size="large" color="inherit">
+            <Badge badgeContent={4} color="error">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <p>Messages</p>
+        </MenuItem>
+        <MenuItem>
+          <IconButton size="large" color="inherit">
+            <Badge badgeContent={17} color="error">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <p>Notifications</p>
+        </MenuItem>
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton size="large" color="inherit">
+            <AccountCircle />
+          </IconButton>
+          <p>Profile</p>
+        </MenuItem>
+      </Menu>
     </>
   );
 };

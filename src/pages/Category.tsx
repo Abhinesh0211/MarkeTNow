@@ -5,10 +5,10 @@ import {
   CardMedia,
   Typography,
   CardActionArea,
-  Container,
   CssBaseline,
   Box,
 } from '@mui/material';
+import Marquee from 'react-fast-marquee';
 
 const cardSections = [
   {
@@ -35,74 +35,59 @@ const cardSections = [
 
 function Category() {
   return (
-    <Container maxWidth="lg" sx={{ mt: 4 }}>
+    <Box sx={{ mt: 0, backgroundColor: '#121212', py: 4 }}>
       <CssBaseline />
-      <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold' }}>
-        NEWS CATEGORY
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+        sx={{ fontWeight: 'bold', color: 'white' }}
+      >
+        LATEST NEWS
       </Typography>
 
-      {/* Use Box with flexbox for layout */}
-      <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 3,
-          justifyContent: 'center',
-          mt: 4,
-        }}
-      >
+      {/* Horizontal scrolling cards using Marquee */}
+      <Marquee speed={40} gradient={false} pauseOnHover>
         {cardSections.map((section, index) => (
-          <Box
+          <Card
             key={index}
             sx={{
-              flex: '1 1 100%',
-              maxWidth: '100%',
-              '@media (min-width:600px)': {
-                flex: '1 1 45%',
-                maxWidth: '45%',
-              },
-              '@media (min-width:960px)': {
-                flex: '1 1 22%',
-                maxWidth: '22%',
+              width: 300,
+              mx: 2,
+              borderRadius: 3,
+              backgroundColor: '#1e1e1e',
+              color: 'white',
+              boxShadow: 5,
+              transition: 'transform 0.3s',
+              '&:hover': {
+                transform: 'scale(1.03)',
               },
             }}
           >
-            <Card
-              sx={{
-                height: '100%',
-                borderRadius: 3,
-                boxShadow: 4,
-                transition: 'transform 0.3s',
-                '&:hover': {
-                  transform: 'scale(1.03)',
-                },
-              }}
-            >
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="160"
-                  image={section.image}
-                  alt={section.title}
-                />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    sx={{ fontWeight: 600, color: 'primary.main' }}
-                  >
-                    {section.title}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    {section.text}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Box>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="160"
+                image={section.image}
+                alt={section.title}
+              />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  sx={{ fontWeight: 600, color: 'primary.main' }}
+                >
+                  {section.title}
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'gray' }}>
+                  {section.text}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
         ))}
-      </Box>
-    </Container>
+      </Marquee>
+    </Box>
   );
 }
 

@@ -1,53 +1,84 @@
-/* Home.css */
+/* Import Poppins from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-.home-container {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
+/* Apply global font to body */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* Video background */
+/* Fullscreen video background */
+.home-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .bg-video {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  top: 0;
+  left: 0;
   z-index: -1;
 }
 
-/* Content on top of video */
+/* Centered content over the video */
 .home-content {
-  position: relative;
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0.5); /* Optional dark overlay */
-  padding: 2rem;
-  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  padding: 0 1rem;
 }
 
-/* Button styling */
+/* Heading with Poppins */
+.home-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Second line with Brush Script */
+.second-line {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Stylish black & white buttons */
 .home-button {
-  padding: 10px 20px;
-  margin: 10px;
-  font-size: 16px;
+  margin: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
   border-radius: 5px;
-  border: none;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.home-button.primary {
+.primary {
+  background-color: black;
+  color: white;
+  border: 2px solid black;
+}
+
+.primary:hover {
   background-color: white;
-  color: #6a0dad;
+  color: black;
 }
 
-.home-button.secondary {
-  background-color: transparent;
-  border: 2px solid white;
+.secondary {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+.secondary:hover {
+  background-color: black;
   color: white;
 }
