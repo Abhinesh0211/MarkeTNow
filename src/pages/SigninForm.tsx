@@ -6,7 +6,7 @@ const SigninForm: React.FC = () => {
   const navigate = useNavigate();
 
   const goToSignup = () => {
-    navigate('/');
+    navigate('/signup');
   };
 
   return (

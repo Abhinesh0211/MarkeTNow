@@ -6,7 +6,7 @@ const Landing = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate('/tradingviewsignup'); // 👈 this navigates to the login page
+    navigate('/signin'); // 👈 this navigates to the login page
   };
 
   const handleGetStarted = () => {
